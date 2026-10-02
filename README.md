@@ -30,7 +30,7 @@ Official guide: https://docs.github.com/en/pages/quickstart
 - Update your content and links in `index.html`.
 - Adjust the palette with the variables at the top of `styles.css`.
 - Replace `assets/Jing_Jin_CV.pdf` when your CV changes, preserving its filename.
-- Save your photograph as `assets/portrait.jpg`, and replace `<div class="portrait">...</div>` with `<img class="portrait" src="assets/portrait.jpg" alt="Jing Jin">`. The monogram is temporary; no invented portrait is used.
+- The homepage defaults to `assets/portrait1.jpg` for the large photo and `assets/portrait2.jpg` for the small photo. The About page also uses `portrait1.jpg`.
 
 ## Content notes
 

@@ -15,4 +15,4 @@ Recommended image format:
 - At least 1200 px tall
 - Keep the subject near the center because the cards use `object-fit: cover`
 
-If fewer than two cover photos are available, `assets/portrait.png` remains as the fallback.
+If fewer than two cover photos are available, `assets/portrait1.jpg` is used for the large card and `assets/portrait2.jpg` for the small card.
