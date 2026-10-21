@@ -9,8 +9,8 @@ Open `index.html` in a browser. For a local server, run `python3 -m http.server 
 ## GitHub Pages
 
 This site is published from the `main` branch of the public repository
-`jingjin412/jingjin412.github.io` and is available at
-<https://jingjin412.github.io/>.
+`hi-jingjin/hi-jingjin.github.io` and is available at
+<https://hi-jingjin.github.io/>.
 
 Official guide: https://docs.github.com/en/pages/quickstart
 
