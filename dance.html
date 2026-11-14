@@ -34,20 +34,31 @@ layout: null
 
     <section class="performance-updates" id="performances" aria-labelledby="performances-title">
       <div class="section-heading">
-        <h2 id="performances-title">Recent &amp; upcoming performances</h2>
-        <span class="update-badge">Updating</span>
+        <h2 id="performances-title">Latest posts</h2>
+        <span class="update-badge">Dance log</span>
       </div>
       {% assign dance_posts = site.dance_posts | sort: "date" | reverse %}
       {% if dance_posts.size > 0 %}
       <div class="dance-post-grid">
         {% for post in dance_posts %}
         <article class="dance-post-card">
+          <header class="dance-post-meta">
+            <span class="dance-post-avatar" aria-hidden="true">J</span>
+            <span><strong>Jing Jin</strong><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time></span>
+            <span class="dance-post-menu" aria-hidden="true">•••</span>
+          </header>
           {% if post.cover %}<a class="dance-post-cover" href="{{ post.url | relative_url }}"><img src="{{ post.cover | relative_url }}" alt="{{ post.cover_alt | default: post.title | escape }}" loading="lazy"></a>{% endif %}
           <div class="dance-post-copy">
-            <p class="dance-post-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time></p>
             <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
-            {% if post.summary %}<p>{{ post.summary | escape }}</p>{% endif %}
-            <a class="dance-post-read" href="{{ post.url | relative_url }}">Read update <span aria-hidden="true">→</span></a>
+            {% if post.summary %}
+              <p>{{ post.summary | escape }}</p>
+            {% else %}
+              <p>{{ post.content | strip_html | normalize_whitespace | truncatewords: 38 }}</p>
+            {% endif %}
+            <div class="dance-post-actions">
+              <a class="dance-post-read" href="{{ post.url | relative_url }}">Open post <span aria-hidden="true">→</span></a>
+              {% if post.external_url %}<a class="dance-post-external" href="{{ post.external_url | escape }}" target="_blank" rel="noopener">Watch <span aria-hidden="true">↗</span></a>{% endif %}
+            </div>
           </div>
         </article>
         {% endfor %}
