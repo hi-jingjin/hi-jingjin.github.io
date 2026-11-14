@@ -1,7 +1,6 @@
 backend:
-  name: github
-  repo: hi-jingjin/hi-jingjin.github.io
-  branch: main
+  name: turbo-github
+  turbo_site_id: 880bc932-c2d2-4e80-a87a-67e45e591442
 
 publish_mode: simple
 media_folder: assets/dance/uploads
