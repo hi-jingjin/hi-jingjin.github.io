@@ -1,20 +1,16 @@
 ---
 title: 2025 NTU CSIE Night | Girls' Dance Performance
+cover: /assets/dance/uploads/截圖-2026-11-14-下午5.16.40.png
+external_url: https://youtu.be/qAqRtSYACs0?si=UrCk7rrD0xq15bmD
 date: 2025-05-15T12:08:00.000+08:00
 published: true
 summary: "One of my favorite college memories: dancing with my girls at NTU CS
   Night 2025!"
-cover: /assets/dance/uploads/截圖-2026-11-14-下午5.16.40.png
-external_url: https://youtu.be/qAqRtSYACs0?si=UrCk7rrD0xq15bmD
 ---
-I've always loved dancing, and this year's CS Night was especially meaningful to me because it was probably my last time performing with this amazing group of girls before graduation. 🥹
+My last performance in college! 🥹 So glad I had the guts to start this girls' dance team and make it all happen.
 
-We spent so many evenings practicing together, figuring out choreography, fixing little details, and laughing at our mistakes. It was exhausting sometimes, but I wouldn't trade those memories for anything.
+It wasn't always easy, but seeing everything come together on stage made it all worth it.
 
-We even got some of our professors to join us on stage for a special part of the performance, which made the night even more unforgettable!
+Thank you to everyone who made this performance possible and shared this stage with me. I couldn't have done it without you.
 
-I thought I'd be all smiles after the performance, but the moment it ended, I couldn't stop crying. I guess I just wasn't ready for this chapter to end.
-
-So grateful for everyone who made this night possible. Love you girls! 💗
-
-One stage may end, but that doesn't mean we stop dreaming. ✨
+Love you all so much!! 💗
