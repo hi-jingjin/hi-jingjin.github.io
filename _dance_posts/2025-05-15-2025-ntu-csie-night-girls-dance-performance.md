@@ -4,7 +4,8 @@ date: 2025-05-15T12:08:00.000+08:00
 published: true
 summary: "One of my favorite college memories: dancing with my girls at NTU CS
   Night 2025!"
-cover: https://youtu.be/qAqRtSYACs0?si=UrCk7rrD0xq15bmD
+cover: /assets/dance/uploads/截圖-2026-11-14-下午5.16.40.png
+external_url: https://youtu.be/qAqRtSYACs0?si=UrCk7rrD0xq15bmD
 ---
 I've always loved dancing, and this year's CS Night was especially meaningful to me because it was probably my last time performing with this amazing group of girls before graduation. 🥹
 

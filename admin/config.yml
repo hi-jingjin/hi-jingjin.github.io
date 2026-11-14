@@ -27,7 +27,15 @@ collections:
       - { label: Publish date, name: date, widget: datetime }
       - { label: Published, name: published, widget: boolean, default: true }
       - { label: Summary, name: summary, widget: text }
-      - { label: Cover image, name: cover, widget: image, required: false }
+      - label: Cover image
+        name: cover
+        widget: image
+        required: false
+        choose_url: false
+        media_library:
+          config:
+            multiple: false
+            max_file_size: 5242880
       - { label: Cover image description, name: cover_alt, widget: string, required: false, hint: Describe the image for accessibility. }
       - { label: Video or social link, name: external_url, widget: string, required: false }
       - { label: Body, name: body, widget: markdown }
