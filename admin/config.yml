@@ -25,23 +25,23 @@ collections:
       visualEditing: true
     fields:
       - { label: Post title, name: title, widget: string, hint: A short title for this update. }
-      - label: Cover photo
+      - label: Feed cover
         name: cover
         widget: image
-        required: false
-        hint: This is the first photo in your post.
+        required: true
+        hint: Used only as the thumbnail on the Dance feed. It will not appear inside the post.
         choose_url: false
         media_library:
           config:
             multiple: false
             max_file_size: 5242880
-      - label: More photos
+      - label: Post photos
         name: gallery
         widget: list
         required: false
         default: []
-        max: 9
-        hint: Add up to 9 more photos. Drag items to change their order.
+        max: 10
+        hint: These photos appear only inside the post. Add up to 10 and drag items to change their order.
         field:
           label: Photo
           name: image

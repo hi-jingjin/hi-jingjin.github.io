@@ -18,13 +18,7 @@
       var entry = this.props.entry;
       var title = entry.getIn(["data", "title"]) || "Your post title";
       var cover = entry.getIn(["data", "cover"]);
-      var gallery = entry.getIn(["data", "gallery"]);
       var imagePaths = cover ? [cover] : [];
-      if (gallery && gallery.forEach) {
-        gallery.forEach(function (path) {
-          if (path) imagePaths.push(path);
-        });
-      }
       var imageUrls = imagePaths.map(getAssetUrl.bind(null, this.props.getAsset));
       var rawDate = entry.getIn(["data", "date"]);
       var date = rawDate ? new Date(rawDate).toLocaleDateString("en-US", {
