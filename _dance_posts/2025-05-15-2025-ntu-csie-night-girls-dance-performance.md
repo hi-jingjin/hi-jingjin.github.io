@@ -1,6 +1,6 @@
 ---
 title: 2025 NTU CSIE Night | Girls' Dance Performance
-cover: /assets/dance/uploads/截圖-2026-11-14-下午5.16.40.png
+cover: ""
 external_url: https://youtu.be/qAqRtSYACs0?si=UrCk7rrD0xq15bmD
 date: 2025-05-15T12:08:00.000+08:00
 published: true
