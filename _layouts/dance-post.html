@@ -24,7 +24,7 @@
       <p class="eyebrow"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
       <h2>{{ page.title | escape }}</h2>
       {% if page.summary %}<p class="dance-article-summary">{{ page.summary | escape }}</p>{% endif %}
-      {% if page.cover %}<img class="dance-article-cover" src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title | escape }}">{% endif %}
+      {% include dance-media.html url=page.external_url cover=page.cover alt=page.cover_alt title=page.title article=true %}
       <div class="dance-article-body">{{ content }}</div>
       {% if page.external_url %}<a class="button button-primary dance-article-link" href="{{ page.external_url | escape }}" target="_blank" rel="noopener">Watch or view more <span aria-hidden="true">↗</span></a>{% endif %}
     </article>

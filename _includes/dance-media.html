@@ -1,0 +1,22 @@
+{% assign media_url = include.url | default: "" %}
+{% assign youtube_id = "" %}
+{% if media_url contains "youtu.be/" %}
+  {% assign youtube_id = media_url | split: "youtu.be/" | last | split: "?" | first | split: "&" | first %}
+{% elsif media_url contains "youtube.com/watch" and media_url contains "v=" %}
+  {% assign youtube_id = media_url | split: "v=" | last | split: "&" | first | split: "#" | first %}
+{% elsif media_url contains "youtube.com/shorts/" %}
+  {% assign youtube_id = media_url | split: "youtube.com/shorts/" | last | split: "?" | first | split: "&" | first %}
+{% elsif media_url contains "youtube.com/embed/" %}
+  {% assign youtube_id = media_url | split: "youtube.com/embed/" | last | split: "?" | first | split: "&" | first %}
+{% endif %}
+{% if youtube_id != "" %}
+<div class="dance-video-wrap{% if include.article %} dance-article-video{% endif %}">
+  <iframe src="https://www.youtube-nocookie.com/embed/{{ youtube_id | escape }}" title="{{ include.title | default: 'Dance' | escape }} video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+{% elsif include.cover %}
+  {% if include.article %}
+  <img class="dance-article-cover" src="{{ include.cover | relative_url }}" alt="{{ include.alt | default: include.title | escape }}">
+  {% else %}
+  <a class="dance-post-cover" href="{{ include.href | relative_url }}"><img src="{{ include.cover | relative_url }}" alt="{{ include.alt | default: include.title | escape }}" loading="lazy"></a>
+  {% endif %}
+{% endif %}

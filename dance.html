@@ -47,7 +47,7 @@ layout: null
             <span><strong>Jing Jin</strong><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time></span>
             <span class="dance-post-menu" aria-hidden="true">•••</span>
           </header>
-          {% if post.cover %}<a class="dance-post-cover" href="{{ post.url | relative_url }}"><img src="{{ post.cover | relative_url }}" alt="{{ post.cover_alt | default: post.title | escape }}" loading="lazy"></a>{% endif %}
+          {% include dance-media.html url=post.external_url cover=post.cover alt=post.cover_alt title=post.title href=post.url %}
           <div class="dance-post-copy">
             <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
             {% if post.summary %}

@@ -2,6 +2,12 @@
   var h = window.h;
   var createClass = window.createClass;
 
+  function getYouTubeId(url) {
+    if (!url) return null;
+    var match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/))([A-Za-z0-9_-]{6,})/i);
+    return match ? match[1] : null;
+  }
+
   var DancePostPreview = createClass({
     render: function () {
       var entry = this.props.entry;
@@ -16,6 +22,7 @@
         year: "numeric"
       }) : "Just now";
       var link = entry.getIn(["data", "external_url"]);
+      var youtubeId = getYouTubeId(link);
 
       return h("main", { className: "social-preview-shell" },
         h("article", { className: "social-preview-card" },
@@ -27,7 +34,16 @@
             ),
             h("span", { className: "social-preview-menu" }, "•••")
           ),
-          imageUrl
+          youtubeId
+            ? h("div", { className: "social-preview-video" },
+                h("iframe", {
+                  src: "https://www.youtube-nocookie.com/embed/" + youtubeId,
+                  title: title + " video",
+                  allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+                  allowFullScreen: true
+                })
+              )
+            : imageUrl
             ? h("img", { className: "social-preview-image", src: imageUrl, alt: "" })
             : h("div", { className: "social-preview-placeholder" },
                 h("span", null, "＋"),
