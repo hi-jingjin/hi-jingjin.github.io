@@ -9,22 +9,44 @@
 {% elsif media_url contains "youtube.com/embed/" %}
   {% assign youtube_id = media_url | split: "youtube.com/embed/" | last | split: "?" | first | split: "&" | first %}
 {% endif %}
-{% assign media_count = include.gallery | size %}
-{% if include.cover %}{% assign media_count = media_count | plus: 1 %}{% endif %}
-{% if youtube_id != "" %}{% assign media_count = media_count | plus: 1 %}{% endif %}
+{% assign image_count = include.gallery | size %}
+{% if include.cover %}{% assign image_count = image_count | plus: 1 %}{% endif %}
+{% assign media_count = image_count %}
+{% if include.preview %}
+  {% if media_count == 0 and youtube_id != "" %}{% assign media_count = 1 %}{% endif %}
+{% elsif youtube_id != "" %}
+  {% assign media_count = media_count | plus: 1 %}
+{% endif %}
 {% if media_count > 0 %}
 <div class="dance-carousel{% if include.article %} dance-article-media{% endif %}" data-carousel>
   <div class="dance-carousel-track" data-carousel-track tabindex="0" aria-label="{{ include.title | default: 'Dance post' | escape }} media">
-    {% if youtube_id != "" %}
+    {% if youtube_id != "" and include.preview != true %}
     <div class="dance-carousel-slide">
       <iframe src="https://www.youtube-nocookie.com/embed/{{ youtube_id | escape }}" title="{{ include.title | default: 'Dance' | escape }} video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
+    {% elsif youtube_id != "" and image_count == 0 %}
+    <div class="dance-carousel-slide">
+      <a class="dance-carousel-link" href="{{ include.href | relative_url }}" aria-label="Open {{ include.title | default: 'dance post' | escape }} to play video">
+        <img src="https://i.ytimg.com/vi/{{ youtube_id | escape }}/hqdefault.jpg" alt="{{ include.title | default: 'Dance post' | escape }} video thumbnail" loading="lazy">
+        <span class="dance-carousel-play" aria-hidden="true">▶</span>
+      </a>
+    </div>
     {% endif %}
     {% if include.cover %}
-    <div class="dance-carousel-slide"><img src="{{ include.cover | relative_url }}" alt="{{ include.alt | default: include.title | escape }}" loading="lazy"></div>
+    <div class="dance-carousel-slide">
+      {% if include.preview %}<a class="dance-carousel-link" href="{{ include.href | relative_url }}">{% endif %}
+      <img src="{{ include.cover | relative_url }}" alt="{{ include.alt | default: include.title | escape }}" loading="lazy">
+      {% if include.preview and youtube_id != "" %}<span class="dance-carousel-play" aria-hidden="true">▶</span>{% endif %}
+      {% if include.preview %}</a>{% endif %}
+    </div>
     {% endif %}
     {% for image in include.gallery %}
-    <div class="dance-carousel-slide"><img src="{{ image | relative_url }}" alt="{{ include.title | default: 'Dance post' | escape }} — additional photo {{ forloop.index }}" loading="lazy"></div>
+    <div class="dance-carousel-slide">
+      {% if include.preview %}<a class="dance-carousel-link" href="{{ include.href | relative_url }}">{% endif %}
+      <img src="{{ image | relative_url }}" alt="{{ include.title | default: 'Dance post' | escape }} — additional photo {{ forloop.index }}" loading="lazy">
+      {% if include.preview and youtube_id != "" and include.cover == nil and forloop.first %}<span class="dance-carousel-play" aria-hidden="true">▶</span>{% endif %}
+      {% if include.preview %}</a>{% endif %}
+    </div>
     {% endfor %}
   </div>
   {% if media_count > 1 %}

@@ -52,6 +52,6 @@ collections:
               multiple: false
               max_file_size: 5242880
       - { label: Caption, name: body, widget: markdown, hint: Write the story behind the photo or performance. }
-      - { label: YouTube or social link, name: external_url, widget: string, required: false, hint: Paste a YouTube link to show the video player directly in your post. Instagram and other links will remain clickable. }
+      - { label: YouTube or social link, name: external_url, widget: string, required: false, hint: Paste a YouTube link to show its player on the single-post page. The feed will use your cover photo as its thumbnail. }
       - { label: Posted at, name: date, widget: datetime, default: "{{now}}" }
       - { label: Published, name: published, widget: hidden, default: true }

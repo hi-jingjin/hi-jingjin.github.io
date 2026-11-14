@@ -36,21 +36,18 @@
       var youtubeId = getYouTubeId(link);
       var slides = [];
 
-      if (youtubeId) {
-        slides.push(h("div", { className: "social-preview-slide", key: "video" },
-          h("iframe", {
-            src: "https://www.youtube-nocookie.com/embed/" + youtubeId,
-            title: title + " video",
-            allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-            allowFullScreen: true
-          })
-        ));
-      }
       imageUrls.forEach(function (url, index) {
         slides.push(h("div", { className: "social-preview-slide", key: "image-" + index },
-          h("img", { src: url, alt: "" })
+          h("img", { src: url, alt: "" }),
+          youtubeId && index === 0 ? h("span", { className: "social-preview-play" }, "▶") : null
         ));
       });
+      if (!imageUrls.length && youtubeId) {
+        slides.push(h("div", { className: "social-preview-slide", key: "video-thumbnail" },
+          h("img", { src: "https://i.ytimg.com/vi/" + youtubeId + "/hqdefault.jpg", alt: "" }),
+          h("span", { className: "social-preview-play" }, "▶")
+        ));
+      }
 
       return h("main", { className: "social-preview-shell" },
         h("article", { className: "social-preview-card" },
