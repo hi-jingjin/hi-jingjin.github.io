@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +37,22 @@
         <h2 id="performances-title">Recent &amp; upcoming performances</h2>
         <span class="update-badge">Updating</span>
       </div>
+      {% assign dance_posts = site.dance_posts | sort: "date" | reverse %}
+      {% if dance_posts.size > 0 %}
+      <div class="dance-post-grid">
+        {% for post in dance_posts %}
+        <article class="dance-post-card">
+          {% if post.cover %}<a class="dance-post-cover" href="{{ post.url | relative_url }}"><img src="{{ post.cover | relative_url }}" alt="{{ post.cover_alt | default: post.title | escape }}" loading="lazy"></a>{% endif %}
+          <div class="dance-post-copy">
+            <p class="dance-post-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time></p>
+            <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+            {% if post.summary %}<p>{{ post.summary | escape }}</p>{% endif %}
+            <a class="dance-post-read" href="{{ post.url | relative_url }}">Read update <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+      {% else %}
       <div class="performance-note">
         <span class="performance-mark" aria-hidden="true">♪</span>
         <div>
@@ -41,6 +60,7 @@
           <p>New performance dates and recaps will be posted here. In the meantime, find the latest clips on <a href="https://www.instagram.com/jincovs/" target="_blank" rel="noopener me">Instagram</a>.</p>
         </div>
       </div>
+      {% endif %}
     </section>
 
     <section class="collaboration-card" id="collaborate" aria-labelledby="collaborate-title">

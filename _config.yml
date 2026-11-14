@@ -1,0 +1,17 @@
+title: Jing Jin
+url: https://hi-jingjin.github.io
+timezone: Asia/Taipei
+markdown: kramdown
+
+collections:
+  dance_posts:
+    output: true
+    permalink: /dance/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: dance_posts
+    values:
+      layout: dance-post
+

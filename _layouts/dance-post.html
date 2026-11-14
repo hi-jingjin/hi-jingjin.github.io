@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.summary | default: page.title | strip_html | escape }}">
+  <meta name="theme-color" content="#7860b4">
+  <title>{{ page.title | escape }} · Dance · Jing Jin</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%237860b4'/%3E%3Ctext x='20' y='28' text-anchor='middle' font-family='Arial' font-size='26' fill='white'%3Ej%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="profile-header dance-header">
+    <div class="header-inner">
+      <h1><a class="home-name" href="{{ '/index.html' | relative_url }}">Jing Jin</a><span class="name-flower" aria-hidden="true">✿</span></h1>
+      <nav aria-label="Dance post links"><a href="{{ '/index.html' | relative_url }}">Home</a><a href="{{ '/about.html' | relative_url }}">About me</a><a href="{{ '/dance.html' | relative_url }}">Dance</a><a href="https://www.instagram.com/jincovs/" target="_blank" rel="noopener me">Instagram</a><a href="https://youtube.com/channel/UCvVNt9VpeLgAX3Oc7UMqZHw?si=EjtOzWuwT7G_DY0v" target="_blank" rel="noopener">YouTube</a></nav>
+    </div>
+  </header>
+
+  <main id="main" class="page dance-page dance-article-page">
+    <article class="dance-article">
+      <a class="dance-back-link" href="{{ '/dance.html#performances' | relative_url }}"><span aria-hidden="true">←</span> Back to dance updates</a>
+      <p class="eyebrow"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
+      <h2>{{ page.title | escape }}</h2>
+      {% if page.summary %}<p class="dance-article-summary">{{ page.summary | escape }}</p>{% endif %}
+      {% if page.cover %}<img class="dance-article-cover" src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title | escape }}">{% endif %}
+      <div class="dance-article-body">{{ content }}</div>
+      {% if page.external_url %}<a class="button button-primary dance-article-link" href="{{ page.external_url | escape }}" target="_blank" rel="noopener">Watch or view more <span aria-hidden="true">↗</span></a>{% endif %}
+    </article>
+
+    <footer><span>Jing Jin · Taipei</span><a href="{{ '/dance.html' | relative_url }}">Dance</a></footer>
+  </main>
+</body>
+</html>
+
