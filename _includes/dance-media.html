@@ -9,14 +9,28 @@
 {% elsif media_url contains "youtube.com/embed/" %}
   {% assign youtube_id = media_url | split: "youtube.com/embed/" | last | split: "?" | first | split: "&" | first %}
 {% endif %}
-{% if youtube_id != "" %}
-<div class="dance-video-wrap{% if include.article %} dance-article-video{% endif %}">
-  <iframe src="https://www.youtube-nocookie.com/embed/{{ youtube_id | escape }}" title="{{ include.title | default: 'Dance' | escape }} video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
-{% elsif include.cover %}
-  {% if include.article %}
-  <img class="dance-article-cover" src="{{ include.cover | relative_url }}" alt="{{ include.alt | default: include.title | escape }}">
-  {% else %}
-  <a class="dance-post-cover" href="{{ include.href | relative_url }}"><img src="{{ include.cover | relative_url }}" alt="{{ include.alt | default: include.title | escape }}" loading="lazy"></a>
+{% assign media_count = include.gallery | size %}
+{% if include.cover %}{% assign media_count = media_count | plus: 1 %}{% endif %}
+{% if youtube_id != "" %}{% assign media_count = media_count | plus: 1 %}{% endif %}
+{% if media_count > 0 %}
+<div class="dance-carousel{% if include.article %} dance-article-media{% endif %}" data-carousel>
+  <div class="dance-carousel-track" data-carousel-track tabindex="0" aria-label="{{ include.title | default: 'Dance post' | escape }} media">
+    {% if youtube_id != "" %}
+    <div class="dance-carousel-slide">
+      <iframe src="https://www.youtube-nocookie.com/embed/{{ youtube_id | escape }}" title="{{ include.title | default: 'Dance' | escape }} video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    {% endif %}
+    {% if include.cover %}
+    <div class="dance-carousel-slide"><img src="{{ include.cover | relative_url }}" alt="{{ include.alt | default: include.title | escape }}" loading="lazy"></div>
+    {% endif %}
+    {% for image in include.gallery %}
+    <div class="dance-carousel-slide"><img src="{{ image | relative_url }}" alt="{{ include.title | default: 'Dance post' | escape }} — additional photo {{ forloop.index }}" loading="lazy"></div>
+    {% endfor %}
+  </div>
+  {% if media_count > 1 %}
+  <button class="dance-carousel-button dance-carousel-prev" type="button" data-carousel-prev aria-label="Previous photo or video">‹</button>
+  <button class="dance-carousel-button dance-carousel-next" type="button" data-carousel-next aria-label="Next photo or video">›</button>
+  <span class="dance-carousel-count" aria-live="polite"><span data-carousel-current>1</span> / {{ media_count }}</span>
   {% endif %}
+</div>
 {% endif %}

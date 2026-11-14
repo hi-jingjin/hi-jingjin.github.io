@@ -8,13 +8,24 @@
     return match ? match[1] : null;
   }
 
+  function getAssetUrl(getAsset, path) {
+    var asset = path ? getAsset(path) : null;
+    return asset && asset.toString ? asset.toString() : asset;
+  }
+
   var DancePostPreview = createClass({
     render: function () {
       var entry = this.props.entry;
       var title = entry.getIn(["data", "title"]) || "Your post title";
       var cover = entry.getIn(["data", "cover"]);
-      var asset = cover ? this.props.getAsset(cover) : null;
-      var imageUrl = asset && asset.toString ? asset.toString() : asset;
+      var gallery = entry.getIn(["data", "gallery"]);
+      var imagePaths = cover ? [cover] : [];
+      if (gallery && gallery.forEach) {
+        gallery.forEach(function (path) {
+          if (path) imagePaths.push(path);
+        });
+      }
+      var imageUrls = imagePaths.map(getAssetUrl.bind(null, this.props.getAsset));
       var rawDate = entry.getIn(["data", "date"]);
       var date = rawDate ? new Date(rawDate).toLocaleDateString("en-US", {
         month: "short",
@@ -23,6 +34,23 @@
       }) : "Just now";
       var link = entry.getIn(["data", "external_url"]);
       var youtubeId = getYouTubeId(link);
+      var slides = [];
+
+      if (youtubeId) {
+        slides.push(h("div", { className: "social-preview-slide", key: "video" },
+          h("iframe", {
+            src: "https://www.youtube-nocookie.com/embed/" + youtubeId,
+            title: title + " video",
+            allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+            allowFullScreen: true
+          })
+        ));
+      }
+      imageUrls.forEach(function (url, index) {
+        slides.push(h("div", { className: "social-preview-slide", key: "image-" + index },
+          h("img", { src: url, alt: "" })
+        ));
+      });
 
       return h("main", { className: "social-preview-shell" },
         h("article", { className: "social-preview-card" },
@@ -34,17 +62,11 @@
             ),
             h("span", { className: "social-preview-menu" }, "•••")
           ),
-          youtubeId
-            ? h("div", { className: "social-preview-video" },
-                h("iframe", {
-                  src: "https://www.youtube-nocookie.com/embed/" + youtubeId,
-                  title: title + " video",
-                  allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-                  allowFullScreen: true
-                })
+          slides.length
+            ? h("div", { className: "social-preview-gallery" },
+                h("div", { className: "social-preview-track" }, slides),
+                slides.length > 1 ? h("span", { className: "social-preview-count" }, "1 / " + slides.length) : null
               )
-            : imageUrl
-            ? h("img", { className: "social-preview-image", src: imageUrl, alt: "" })
             : h("div", { className: "social-preview-placeholder" },
                 h("span", null, "＋"),
                 h("small", null, "Your photo will appear here")

@@ -47,7 +47,7 @@ layout: null
             <span><strong>Jing Jin</strong><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time></span>
             <span class="dance-post-menu" aria-hidden="true">•••</span>
           </header>
-          {% include dance-media.html url=post.external_url cover=post.cover alt=post.cover_alt title=post.title href=post.url %}
+          {% include dance-media.html url=post.external_url cover=post.cover gallery=post.gallery alt=post.cover_alt title=post.title href=post.url %}
           <div class="dance-post-copy">
             <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
             {% if post.summary %}
@@ -91,5 +91,6 @@ layout: null
 
     <footer><span>Jing Jin · Taipei</span><a href="about.html">About me</a></footer>
   </main>
+  <script src="{{ '/assets/dance-carousel.js' | relative_url }}" defer></script>
 </body>
 </html>
