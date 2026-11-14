@@ -1,0 +1,26 @@
+backend:
+  name: github
+  repo: hi-jingjin/hi-jingjin.github.io
+  branch: main
+
+publish_mode: simple
+media_folder: assets/dance/uploads
+public_folder: /assets/dance/uploads
+
+collections:
+  - name: dance_posts
+    label: Dance posts
+    label_singular: Dance post
+    folder: _dance_posts
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Publish date, name: date, widget: datetime }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Summary, name: summary, widget: text }
+      - { label: Cover image, name: cover, widget: image, required: false }
+      - { label: Video or social link, name: external_url, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown }
