@@ -1,4 +1,5 @@
 {% assign media_url = include.url | default: "" %}
+{% assign cover_path = include.cover | default: "" %}
 {% assign youtube_id = "" %}
 {% if media_url contains "youtu.be/" %}
   {% assign youtube_id = media_url | split: "youtu.be/" | last | split: "?" | first | split: "&" | first %}
@@ -10,7 +11,7 @@
   {% assign youtube_id = media_url | split: "youtube.com/embed/" | last | split: "?" | first | split: "&" | first %}
 {% endif %}
 {% assign image_count = include.gallery | size %}
-{% if include.cover %}{% assign image_count = image_count | plus: 1 %}{% endif %}
+{% if cover_path != "" %}{% assign image_count = image_count | plus: 1 %}{% endif %}
 {% assign media_count = image_count %}
 {% if include.preview %}
   {% if media_count == 0 and youtube_id != "" %}{% assign media_count = 1 %}{% endif %}
@@ -32,10 +33,10 @@
       </a>
     </div>
     {% endif %}
-    {% if include.cover %}
+    {% if cover_path != "" %}
     <div class="dance-carousel-slide">
       {% if include.preview %}<a class="dance-carousel-link" href="{{ include.href | relative_url }}">{% endif %}
-      <img src="{{ include.cover | relative_url }}" alt="{{ include.alt | default: include.title | escape }}" loading="lazy">
+      <img src="{{ cover_path | relative_url }}" alt="{{ include.alt | default: include.title | escape }}" loading="lazy">
       {% if include.preview and youtube_id != "" %}<span class="dance-carousel-play" aria-hidden="true">▶</span>{% endif %}
       {% if include.preview %}</a>{% endif %}
     </div>
@@ -44,7 +45,7 @@
     <div class="dance-carousel-slide">
       {% if include.preview %}<a class="dance-carousel-link" href="{{ include.href | relative_url }}">{% endif %}
       <img src="{{ image | relative_url }}" alt="{{ include.title | default: 'Dance post' | escape }} — additional photo {{ forloop.index }}" loading="lazy">
-      {% if include.preview and youtube_id != "" and include.cover == nil and forloop.first %}<span class="dance-carousel-play" aria-hidden="true">▶</span>{% endif %}
+      {% if include.preview and youtube_id != "" and cover_path == "" and forloop.first %}<span class="dance-carousel-play" aria-hidden="true">▶</span>{% endif %}
       {% if include.preview %}</a>{% endif %}
     </div>
     {% endfor %}
